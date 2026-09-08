@@ -1,6 +1,6 @@
 # Tomas Bau & Sanierung — Website
 
-> **Moderne, hochperformante Webpräsenz für Tomas Bau & Sanierung** — Meisterhafte Bodenbelagsarbeiten, Parkettsanierung und Untergrundvorbereitung in Wuppertal und ganz Nordrhein-Westfalen (150 km Einsatzradius).
+> **Modern, high-performance web platform for Tomas Bau & Sanierung** — Expert flooring installation, parquet restoration, and subfloor preparation based in Wuppertal, Germany, serving a 150 km radius across North Rhine-Westphalia (NRW).
 
 ![Next.js 14](https://img.shields.io/badge/Next.js-14.2-black?style=flat-square&logo=next.js)
 ![React 18](https://img.shields.io/badge/React-18.3-blue?style=flat-square&logo=react)
@@ -10,130 +10,132 @@
 
 ---
 
-## 📌 Inhaltsverzeichnis
+## 📌 Table of Contents
 
-- [Über das Projekt](#-über-das-projekt)
-- [Hauptfunktionen](#-hauptfunktionen)
-- [Technologie-Stack](#-technologie-stack)
-- [Projektstruktur](#-projektstruktur)
-- [Erste Schritte & Befehle](#-erste-schritte--befehle)
-- [Konfiguration & Single Source of Truth (`lib/site.ts`)](#-konfiguration--single-source-of-truth-libsitets)
-- [SEO & Strukturierte Daten](#-seo--strukturierte-daten)
-- [Datenschutz & Barrierefreiheit](#-datenschutz--barrierefreiheit)
-- [Checkliste vor dem Go-Live](#-checkliste-vor-dem-go-live)
-
----
-
-## 🏢 Über das Projekt
-
-Dieses Verzeichnis enthält den vollständigen Next.js 14 App Router Quellcode für **Tomas Bau & Sanierung** (Werth 22, 42275 Wuppertal).
-
-Das Handwerksunternehmen bietet fachgerechte Bodenverlegung (Laminat, Vinyl, Parkett, Designböden), staubarmes Parkettschleifen, Estrichnivellierung sowie den kompletten Rückbau von Altbelägen inklusive Materialbeschaffung aus einer Hand.
-
-Die Website wurde mit Fokus auf maximale Geschwindigkeit, hervorragende mobile Konversionen und kompromisslose lokale Suchmaschinenoptimierung (Local SEO) für Wuppertal und das Ruhrgebiet/Rheinland entwickelt.
+- [About the Project](#-about-the-project)
+- [Key Features](#-key-features)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started & Scripts](#-getting-started--scripts)
+- [Configuration & Single Source of Truth (`lib/site.ts`)](#-configuration--single-source-of-truth-libsitets)
+- [Local SEO & Structured Data](#-local-seo--structured-data)
+- [Privacy (GDPR/DSGVO) & Accessibility](#-privacy-gdprdsgvo--accessibility)
+- [Pre-Launch Checklist](#-pre-launch-checklist)
+- [License](#-license)
 
 ---
 
-## ✨ Hauptfunktionen
+## 🏢 About the Project
 
-- **⚡ Server Components (Next.js 14 App Router):** Vollständiges Server-Rendering aller Inhalte für ultraschnelle Ladezeiten und optimale Auffindbarkeit.
-- **📱 Mobile-First Konvertierung:** 
-  - Feste Kontaktleiste (`MobileCallBar`) mit Direktwahl und WhatsApp-Schnellkontakt auf Smartphones.
-  - Vollständig responsives Layout getestet auf Geräten von 320 px bis 4K-Monitoren.
-- **🖼️ Interaktive Projektgalerie mit echtem Bildmaterial:**
-  - Kategoriefilter (*Vorher/Nachher*, *Fertige Räume*, *In Arbeit*).
-  - Zugänglicher nativer Lightbox-Dialog mit Tastaturbedienung (Pfeiltasten, Escape) und Gesten-/Hintergrund-Schließen.
-- **🛠️ Vollständiges Leistungsspektrum (9 Leistungsbereiche):**
-  - Hervorgehobene Kernleistungen sowie aufklappbare Detailbeschreibungen mit Anker-Direktverlinkung (`#service-{slug}`).
-- **📍 Lokale SEO-Präsenz & Einsatzgebiet:**
-  - 26 indexierbare Städte im 150-km-Umkreis (Düsseldorf, Köln, Essen, Dortmund, Solingen, Remscheid etc.).
-- **📋 Transparenter FAQ-Bereich:**
-  - Häufige Kundenfragen zu Kosten, Materialbeschaffung, Sanierungsfähigkeit und Umkreis.
-- **✉️ Barrierefreies Kontaktformular:**
-  - Bereitet eine strukturierte E-Mail-Anfrage (`mailto:`) vor, ohne dass sensible Kundendaten über externe Drittanbieter-Server geleitet werden müssen.
-- **🔒 Datenschutzkonform (DSGVO):**
-  - Selbstgehostete Schriftarten (Inter Variable WOFF2, kein Google Fonts CDN).
-  - Keine Tracking-Cookies oder Drittanbieter-Tracker.
-  - Datenschutzfreundliche externe Verlinkung zu Google Maps ohne Remote-Iframe-Tracking.
+This directory contains the complete Next.js 14 App Router application for **Tomas Bau & Sanierung** (Werth 22, 42275 Wuppertal, Germany).
+
+The company specializes in professional flooring installation (laminate, vinyl, hardwood parquet, herringbone, and design floors), dust-free parquet sanding, screed leveling, subfloor preparation, and full removal/disposal of existing floors.
+
+The web platform is built for maximum load speed, high mobile conversion rates, and strict Local SEO for Wuppertal and the Rhine-Ruhr area.
 
 ---
 
-## 🛠️ Technologie-Stack
+## ✨ Key Features
 
-| Bereich | Technologie | Beschreibung |
+- **⚡ Server-First Architecture (Next.js 14 App Router):** Server-rendered markup ensuring rapid First Contentful Paint (FCP) and full search engine indexability.
+- **📱 Mobile Conversion Focus:**
+  - Floating bottom bar (`MobileCallBar`) with instant one-tap calling and WhatsApp chat.
+  - Responsive design tested from 320 px smartphones to large desktop screens.
+- **🖼️ Interactive Real-Project Showcase Gallery:**
+  - Multi-category filtering (*Before / After*, *Finished Rooms*, *In Progress*).
+  - Accessible native HTML5 `<dialog>` lightbox modal with keyboard controls (Arrow keys, Escape) and click-outside dismissal.
+  - Real project images utilizing Next.js `Image` optimization (AVIF/WebP) with hero preloading and lazy loading.
+- **🛠️ 9 Core Services:**
+  - Key offerings with rich imagery and native expandable detail cards with anchor links (`#service-{slug}`).
+- **📍 Local SEO & Service Radius:**
+  - Crawlable coverage across 26 major cities within 150 km of Wuppertal.
+- **📋 Transparent FAQ Accordion:**
+  - Addressing pricing, material options, restoration feasibility, and regional coverage.
+- **✉️ Accessible Inquiry Form:**
+  - Generates a pre-filled `mailto:` client message without intermediate data tracking.
+- **🔒 GDPR / DSGVO Compliant by Design:**
+  - Self-hosted Inter font (WOFF2) with zero remote font server calls.
+  - Zero tracking cookies or invasive third-party scripts.
+  - Privacy-friendly external Google Maps links avoiding tracking iframes.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Details |
 | :--- | :--- | :--- |
 | **Framework** | [Next.js 14.2](https://nextjs.org/) | App Router, Server Components, Metadata API |
-| **UI-Bibliothek** | [React 18.3](https://react.dev/) | Moderne funktionale Komponenten & Hooks |
-| **Sprache** | [TypeScript 5.5](https://www.typescriptlang.org/) | Durchgängige Typsicherheit für Inhalte & Konfigurationen |
-| **Styling** | [Tailwind CSS 3.4](https://tailwindcss.com/) | Utility-First CSS mit maßgeschneiderter Markenfarbpalette |
-| **Icons & Media** | SVG & Next/Image | Optimierte WebP/JPEG-Bilder mit Prioritäts- und Lazy-Loading |
-| **Typografie** | Inter Variable | 100 % lokal gehostet unter `app/fonts/` (OFL Lizenz) |
+| **UI Library** | [React 18.3](https://react.dev/) | Functional components & hooks |
+| **Language** | [TypeScript 5.5](https://www.typescriptlang.org/) | Complete type safety for models and components |
+| **Styling** | [Tailwind CSS 3.4](https://tailwindcss.com/) | Custom brand color palette (Navy / Teal / Warm Gray / Slate) |
+| **Media & Icons** | SVG & Next/Image | Responsive WebP/JPEG assets |
+| **Typography** | Inter Variable | 100% self-hosted in `app/fonts/` (47 KB WOFF2, SIL OFL License) |
 
 ---
 
-## 📂 Projektstruktur
+## 📂 Project Structure
 
 ```text
 tomas-bau-website/
 ├── app/                        # Next.js App Router
-│   ├── datenschutz/            # Datenschutzerklärung (DSGVO-Entwurf)
-│   ├── fonts/                  # Selbstgehostete Inter Variable WOFF2 Font
-│   ├── impressum/              # Impressum (Rechtlicher Entwurf)
-│   ├── globals.css             # Globale Styles & Tailwind Direktiven
-│   ├── layout.tsx              # Root Layout mit Metadaten & Schriftart-Definition
-│   ├── page.tsx                # Startseite (Hero, Leistungen, Galerie, FAQ, Kontakt)
-│   ├── robots.ts               # Dynamische robots.txt Generierung
-│   └── sitemap.ts              # Dynamische sitemap.xml Generierung
-├── components/                 # Wiederverwendbare UI-Komponenten
-│   ├── ContactForm.tsx         # Kunden-Kontaktformular
-│   ├── Footer.tsx              # Seitenfuß mit NAP-Daten & Rechtslinks
-│   ├── Gallery.tsx             # Projektgalerie mit Filter & nativer Lightbox
-│   ├── Header.tsx              # Header mit Navigation & Notfall-Telefonnummer
-│   ├── MobileCallBar.tsx       # Fixierte mobile Anruf- & WhatsApp-Leiste
-│   └── StructuredData.tsx      # Schema.org JSON-LD Script Injection
+│   ├── datenschutz/            # Privacy Policy route (/datenschutz - GDPR draft)
+│   ├── fonts/                  # Self-hosted Inter Variable WOFF2 font files
+│   ├── impressum/              # Legal Notice route (/impressum - German Impressum draft)
+│   ├── globals.css             # Global styles, color tokens & Tailwind directives
+│   ├── layout.tsx              # Root HTML shell, metadata, and font definitions
+│   ├── page.tsx                # Homepage (Hero, Services, About, Gallery, FAQ, Contact)
+│   ├── robots.ts               # Dynamic robots.txt generation
+│   └── sitemap.ts              # Dynamic sitemap.xml generation
+├── components/                 # Reusable UI component layer
+│   ├── ContactForm.tsx         # Customer inquiry form
+│   ├── Footer.tsx              # Page footer with NAP data & legal navigation
+│   ├── Gallery.tsx             # Filterable gallery with native accessible lightbox
+│   ├── Header.tsx              # Navigation bar with emergency call action
+│   ├── MobileCallBar.tsx       # Floating mobile quick-action bar (Call / WhatsApp)
+│   └── StructuredData.tsx      # Schema.org JSON-LD structured data injector
 ├── lib/
-│   └── site.ts                 # Zentrale Single-Source-of-Truth für Inhalte & Metadaten
+│   └── site.ts                 # Single source of truth for business NAP, content, and data
 ├── public/
-│   └── images/                 # Optimierte Fotos für Hero, Galerie & Vorher-Nachher
-├── package.json                # Abhängigkeiten & Scripts
-├── tailwind.config.ts          # Tailwind CSS Konfiguration
-├── tsconfig.json               # TypeScript Konfiguration
-└── README.md                   # Diese Dokumentation
+│   └── images/                 # Processed WebP/JPEG photos for hero & project gallery
+├── package.json                # Dependencies and npm build scripts
+├── tailwind.config.ts          # Tailwind styling configuration
+├── tsconfig.json               # TypeScript compiler configuration
+└── README.md                   # Application documentation
 ```
 
 ---
 
-## 🚀 Erste Schritte & Befehle
+## 🚀 Getting Started & Scripts
 
-### Voraussetzungen
+### Prerequisites
 
-- **Node.js**: Version 18.17 oder höher
-- **npm**: Version 9 oder höher (oder pnpm / yarn)
+- **Node.js**: `v18.17` or higher
+- **npm**: `v9.0` or higher (or `pnpm` / `yarn`)
 
-### Verfügbare Scripts
+### Available Commands
 
 ```bash
-# 1. Abhängigkeiten installieren
+# 1. Install dependencies
 npm install
 
-# 2. Entwicklungsserver starten (auf http://localhost:3000)
+# 2. Start development server (at http://localhost:3000)
 npm run dev
 
-# 3. Produktions-Build erstellen (inkl. TypeScript- & Type-Checks)
+# 3. Create production build (runs TypeScript & bundle checks)
 npm run build
 
-# 4. Produktions-Server starten
+# 4. Start production server
 npm run start
 
-# 5. Linter ausführen
+# 5. Run linter
 npm run lint
 ```
 
 ---
 
-## ⚙️ Konfiguration & Single Source of Truth (`lib/site.ts`)
+## ⚙️ Configuration & Single Source of Truth (`lib/site.ts`)
 
-Sämtliche Unternehmensdaten, Kontaktdaten, Öffnungszeiten, Leistungen und Galerie-Einträge werden zentral in [`lib/site.ts`](file:///Users/aarushgupta/Desktop/Albin%20/tomas-bau-website/lib/site.ts) gepflegt:
+All core company info, contact information, hours, services, and gallery items live in [`lib/site.ts`](file:///Users/aarushgupta/Desktop/Albin%20/tomas-bau-website/lib/site.ts):
 
 ```typescript
 export const site = {
@@ -158,60 +160,59 @@ export const site = {
 };
 ```
 
-> **Vorteil:** Änderungen an Telefonnummer, Adresse oder Öffnungszeiten aktualisieren automatisch sowohl die sichtbaren Komponenten (Header, Footer, Kontakt, Anruf-Buttons) als auch die unsichtbaren SEO-JSON-LD-Schemas. Ein Auseinanderdriften der Daten wird so technisch ausgeschlossen.
+> **Why this matters:** Updating `lib/site.ts` guarantees that UI elements (Header, Footer, ContactForm, MobileCallBar) and SEO structured data (JSON-LD) remain identical, preventing Google data mismatch penalties.
 
-### Umgebungsvariablen (`.env.local`)
+### Environment Variables (`.env.local`)
 
-Erstellen Sie bei Bedarf eine `.env.local` Datei im Verzeichnis `tomas-bau-website/`:
+You can define `.env.local` to override the live canonical URL:
 
 ```env
-# Basis-URL für kanonische Links, OpenGraph und Sitemap
+# Production domain for metadata, OpenGraph, and sitemap.xml
 NEXT_PUBLIC_SITE_URL=https://www.tomasbau.de
 ```
 
 ---
 
-## 🔍 SEO & Strukturierte Daten
+## 🔍 Local SEO & Structured Data
 
-Die Website ist für maximale Sichtbarkeit in lokalen Suchergebnissen (Google Local Pack, Google Maps, Organische Suche) ausgelegt:
-
-- **JSON-LD Schemas (`StructuredData.tsx`):**
-  - `LocalBusiness` / `HomeAndConstructionBusiness`: Vollständige NAP-Konsistenz (Name, Address, Phone), Geo-Koordinaten, Öffnungszeiten und Einzugsgebiet.
-  - `Service`: Maschinenlesbarer Katalog der 9 angebotenen Dienstleistungen.
-  - `FAQPage`: Automatische Spiegelung der sichtbaren Kundenfragen für Rich-Snippet-Chancen in Google.
-  - `WebSite`: Kanonische URL und Seiteninformationen.
+- **Schema.org JSON-LD (`StructuredData.tsx`):**
+  - `LocalBusiness` / `HomeAndConstructionBusiness`: Validates NAP consistency, geographic coordinates, opening hours, and service radius.
+  - `Service`: Structured index of the 9 flooring and renovation offerings.
+  - `FAQPage`: Reflects customer FAQs into Google rich result candidate format.
+  - `WebSite`: Canonical web presence definition.
 - **Sitemap & Robots:**
-  - `/sitemap.xml`: Generiert über `app/sitemap.ts` (enthält die indexierbare Startseite).
-  - `/robots.txt`: Generiert über `app/robots.ts` (verweist auf die Sitemap).
-- **On-Page SEO:**
-  - Semantische HTML5-Struktur mit genau einer `<h1>`-Überschrift auf der Startseite.
-  - Deutsche Bildbeschreibungen (`alt`-Attribute) mit lokalen Suchbegriffen für alle Projektfotos.
-  - Vollständige Open Graph- und Twitter Card-Metadaten.
+  - `/sitemap.xml`: Auto-generated by `app/sitemap.ts` (indexes canonical homepage; legal drafts are `noindex`).
+  - `/robots.txt`: Auto-generated by `app/robots.ts`.
+- **On-Page SEO Hygiene:**
+  - Strict heading hierarchy with one single `<h1>`.
+  - Detailed German `alt` text for images containing local geo-targeted keywords.
+  - Full OpenGraph and Twitter card meta tags.
 
 ---
 
-## 🛡️ Datenschutz & Barrierefreiheit
+## 🛡️ Privacy (GDPR/DSGVO) & Accessibility
 
-- **100 % DSGVO-freundlich:** Keine Einbindung von Google Web Fonts über externe Server. Die Schriftartdatei (`Inter-VariableFont_opsz,wght.woff2`) liegt lokal auf dem Server unter `app/fonts/`.
-- **Keine Tracking-Cookies:** Keine Cookie-Banner-Pflicht, solange keine optionalen Marketing- oder Analyse-Skripte hinzugefügt werden.
-- **Rechtliche Vorlagen:** Vollständige Vorlagen für `/impressum` und `/datenschutz` sind hinterlegt (vor Veröffentlichung durch Inhaber zu prüfen).
-- **A11y / Barrierefreiheit:**
-  - Farbkontraste nach WCAG-Standards.
-  - Tastaturbedienbare Lightbox und Menüs inklusive `Escape`-Unterstützung.
-  - Alle Kerninhalte bleiben auch ohne aktiviertes JavaScript vollständig lesbar.
-
----
-
-## 📋 Checkliste vor dem Go-Live
-
-1. [ ] **Domain bestätigen:** Die finale Domain in `.env.local` und `lib/site.ts` eintragen.
-2. [ ] **Rechtstexte finalisieren:** Inhaberdaten, USt-IdNr. und Registereintrag in [`app/impressum/page.tsx`](file:///Users/aarushgupta/Desktop/Albin%20/tomas-bau-website/app/impressum/page.tsx) und [`app/datenschutz/page.tsx`](file:///Users/aarushgupta/Desktop/Albin%20/tomas-bau-website/app/datenschutz/page.tsx) vervollständigen.
-3. [ ] **Google Search Console:** Nach dem Deployment die Domain verifizieren und die Sitemap `https://ihre-domain.de/sitemap.xml` einreichen.
-4. [ ] **Google Unternehmensprofil:** Abgleich der Kontaktdaten (Name, Telefon, Adresse, Öffnungszeiten) mit den Werten in `lib/site.ts`.
+- **100% GDPR / DSGVO Compliant:**
+  - Inter font is self-hosted locally under `app/fonts/Inter-latin.woff2`.
+  - No analytics or cookie tracking scripts.
+  - External Google Maps link eliminates third-party tracking cookies.
+- **Accessibility (A11y):**
+  - WCAG 2.1 AA compliant contrast ratios.
+  - Keyboard-operable modal lightbox with `Escape` close handler.
+  - All content is readable and rendered even without JavaScript enabled.
 
 ---
 
-## 📄 Lizenz
+## 📋 Pre-Launch Checklist
 
-Proprietäres Projekt für **Tomas Bau & Sanierung**. Alle Rechte vorbehalten.
-Die eingebettete Inter-Schriftart unterliegt der [SIL Open Font License (OFL)](file:///Users/aarushgupta/Desktop/Albin%20/tomas-bau-website/app/fonts/OFL.txt).
+1. [ ] **Verify Production Domain:** Set `NEXT_PUBLIC_SITE_URL` in `.env.local` and `lib/site.ts`.
+2. [ ] **Finalize Legal Notices:** Complete business registration number, VAT ID (USt-IdNr.), and representative details in [`app/impressum/page.tsx`](file:///Users/aarushgupta/Desktop/Albin%20/tomas-bau-website/app/impressum/page.tsx) and [`app/datenschutz/page.tsx`](file:///Users/aarushgupta/Desktop/Albin%20/tomas-bau-website/app/datenschutz/page.tsx).
+3. [ ] **Google Search Console:** Verify domain ownership and submit `https://your-domain.de/sitemap.xml`.
+4. [ ] **Google Business Profile:** Ensure company name, address, phone number, and hours match `lib/site.ts` exactly.
+
+---
+
+## 📄 License
+
+Proprietary project for **Tomas Bau & Sanierung**. All rights reserved.  
+The embedded Inter font is licensed under the [SIL Open Font License (OFL)](file:///Users/aarushgupta/Desktop/Albin%20/tomas-bau-website/app/fonts/OFL.txt).
