@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* sticky header + call bar shouldn't cover the anchor target */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    @apply bg-white text-brand-navy antialiased;
+    /* leave room for the mobile call bar */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-teal ring-offset-2;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-base font-bold
+           transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-offset-2;
+  }
+
+  .btn-red {
+    @apply btn bg-brand-redDark text-white
+           hover:bg-[#a72318] active:scale-[0.98];
+  }
+
+  .btn-teal {
+    @apply btn bg-teal-700 text-white
+           hover:bg-teal-600 active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-white/70 bg-white/5 text-white backdrop-blur-sm
+           hover:border-white hover:bg-white hover:text-brand-navy active:scale-[0.98];
+  }
+
+  .section {
+    @apply py-16 sm:py-20 lg:py-28;
+  }
+
+  .eyebrow {
+    @apply mb-3 inline-block text-sm font-bold uppercase tracking-[0.18em] text-teal;
+  }
+
+  .h2 {
+    @apply text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-[2.75rem];
+  }
+}
+
+/* Native <dialog> lightbox backdrop */
+dialog::backdrop {
+  background: rgb(10 12 20 / 0.92);
+  backdrop-filter: blur(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@layer base {
+  h1, h2, h3 { text-wrap: balance; }
+  ::selection { @apply bg-teal-100 text-brand-navy; }
+  input, textarea { caret-color: #106C72; }
+  html { scrollbar-color: #106C72 #f5f5f4; }
+  a { text-underline-offset: 0.2em; }
+}
+
+@layer components {
+  .hero { @apply relative overflow-hidden bg-brand-navy text-white; }
+  .hero-photo { @apply absolute inset-y-0 right-0 w-3/5; }
+  .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, #1a2035 23%, rgb(26 32 53 / 94%) 39%, rgb(26 32 53 / 25%) 75%, rgb(26 32 53 / 8%)); }
+  .hero-copy { @apply relative max-w-[650px] py-20 lg:py-28; }
+  .hero-copy h1 { @apply max-w-[620px] text-[2.75rem] font-extrabold leading-[1.08] tracking-[-0.035em] sm:text-6xl lg:text-[4.25rem]; }
+  .hero-caption { @apply absolute bottom-8 right-8 hidden max-w-[260px] flex-wrap items-center gap-3 border-t border-white/50 pt-4 text-sm font-semibold text-white lg:flex; }
+  .hero-caption span { @apply block w-full text-xs font-normal text-white/85; }
+  .section-heading { @apply flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-12; }
+  .section-heading > p { @apply max-w-md text-base leading-relaxed text-brand-navy/75; }
+  .vinyl-panel { @apply flex aspect-[4/3] flex-col justify-between rounded-xl bg-teal-700 p-7 text-white; }
+  .vinyl-panel > span { @apply text-3xl font-bold tracking-tight; }
+  .vinyl-panel > p { @apply max-w-[240px] text-lg leading-relaxed text-white/90; }
+  .service-detail { @apply border-b border-brand-navy/15; }
+  .service-detail summary { @apply flex min-h-20 cursor-pointer list-none items-center justify-between gap-5 py-5 text-base font-semibold transition-colors hover:text-teal-700; }
+  .service-detail summary::-webkit-details-marker { display: none; }
+  .service-detail p { @apply max-w-prose pb-6 pr-6 text-base leading-relaxed text-brand-navy/75; }
+  .detail-plus { @apply flex h-8 w-8 shrink-0 items-center justify-center text-2xl font-normal text-teal-700; }
+  .service-detail[open] .detail-plus { transform: rotate(45deg); }
+  .legal-copy h2 { @apply mb-3 mt-9 text-xl font-bold; }
+  .legal-copy p, .legal-copy li { @apply leading-relaxed text-brand-navy/75; }
+  .legal-copy p + p { @apply mt-3; }
+}
+
+@media (max-width: 767px) {
+  .hero-photo { width: 100%; }
+  .hero-shade { background: linear-gradient(90deg, rgb(26 32 53 / 95%), rgb(26 32 53 / 73%)); }
+  .hero-copy { padding-top: 4rem; padding-bottom: 4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
