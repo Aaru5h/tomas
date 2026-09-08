@@ -5,6 +5,7 @@ import { site, description } from '@/lib/site';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MobileCallBar from '@/components/MobileCallBar';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = localFont({
   src: './fonts/Inter-latin.woff2',
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="hauptinhalt">{children}</main>
         <Footer />
         <MobileCallBar />
+        <Analytics />
       </body>
     </html>
   );
