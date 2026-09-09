@@ -17,7 +17,8 @@ export const site = {
     display: '+49 159 01039781',
     href: 'tel:+4915901039781',
     e164: '+4915901039781',
-    whatsapp: 'https://wa.me/4915901039781',
+    whatsapp: 'https://wa.me/4917683135344',
+    whatsappDisplay: '+49 176 83135344',
   },
   email: 'bautomas23@gmail.com',
 
@@ -103,7 +104,7 @@ export const services: Service[] = [
     slug: 'bodeninstallation',
     title: 'Bodeninstallation',
     short: 'Material finden und verlegen – alles aus einer Hand.',
-    body: 'Wir beschaffen den passenden Bodenbelag für Ihr Budget und verlegen ihn direkt. Sie müssen sich um nichts kümmern – ein Ansprechpartner von der Auswahl bis zur letzten Leiste.',
+    body: 'Wir helfen Ihnen, den passenden Bodenbelag für Ihr Budget zu finden, und übernehmen die fachgerechte Verlegung. Unser Angebot umfasst die handwerkliche Arbeit und Unterstützung bei der Materialsuche. Wir verkaufen keine Produkte und betreiben keinen Showroom.',
     icon: 'package',
   },
   {
@@ -129,10 +130,17 @@ export const services: Service[] = [
   },
   {
     slug: 'bodenschleifen',
-    title: 'Bodenschleifen',
+    title: 'Bodenschleifen & Parkettsanierung',
     short: 'Altes Parkett wird wieder wie neu.',
     body: 'Professionelles Abschleifen von Parkett und Dielen mit staubarmen Maschinen, anschließend Versiegeln oder Ölen. Aus einem stumpfen Altboden wird ein Schmuckstück.',
     icon: 'sander',
+  },
+  {
+    slug: 'reinigungsservice',
+    title: 'Reinigungsservice',
+    short: 'Saubere Räume, passend zu Ihrem Auftrag.',
+    body: 'Wir bieten auch Reinigungsarbeiten an. Erzählen Sie uns, welche Räume und Flächen gereinigt werden sollen – Umfang und Termin stimmen wir persönlich mit Ihnen ab.',
+    icon: 'droplet',
   },
 ];
 
@@ -146,6 +154,46 @@ export type GalleryItem = {
 };
 
 export const gallery: GalleryItem[] = [
+  {
+    src: '/images/parkett-rohr-zuschnitt.jpg',
+    alt: 'Zugeschnittene Parkettdielen mit Aussparungen für ein Heizungsrohr',
+    caption: 'Präzision am Heizungsrohr – der Zuschnitt',
+    category: 'in-arbeit',
+    width: 739,
+    height: 1310,
+  },
+  {
+    src: '/images/parkett-rohr-anschluss.jpg',
+    alt: 'Eingepasste Parkettdiele rund um ein Heizungsrohr',
+    caption: 'Präzision am Heizungsrohr – eingepasst',
+    category: 'in-arbeit',
+    width: 739,
+    height: 1310,
+  },
+  {
+    src: '/images/mosaikparkett-fertiger-raum.jpg',
+    alt: 'Mosaikparkett mit warmer Holzmaserung in einem hellen Raum',
+    caption: 'Mosaikparkett – fertige Bodenfläche',
+    category: 'fertige-raeume',
+    width: 719,
+    height: 1290,
+  },
+  {
+    src: '/images/parkett-kamin-anschluss.jpg',
+    alt: 'Holzdielen mit passgenauem Anschluss um einen abgedeckten Kamin',
+    caption: 'Passgenaue Anschlüsse am Kamin',
+    category: 'in-arbeit',
+    width: 730,
+    height: 984,
+  },
+  {
+    src: '/images/boden-sanierung-ablauf.jpg',
+    alt: 'Vier Projektaufnahmen von der Untergrundvorbereitung über die Verlegung bis zum fertigen Dielenboden',
+    caption: 'Vom Untergrund zum fertigen Boden',
+    category: 'vorher-nachher',
+    width: 739,
+    height: 1300,
+  },
   {
     src: '/images/mosaikparkett-versiegelt.jpg',
     alt: 'Frisch geschliffenes und versiegeltes Mosaikparkett aus Eiche in einem Dachgeschosszimmer in Wuppertal',
@@ -266,12 +314,14 @@ export const serviceAreas = [
 ];
 
 export const description =
-  'Bodenleger in Wuppertal: Parkett, Vinyl und Laminat verlegen, Böden schleifen und sanieren. Material und Verlegung aus einer Hand. Jetzt Projekt besprechen.';
+  'Bodenleger und Reinigungsservice in Wuppertal: Parkett, Vinyl und Laminat verlegen, Böden schleifen und sanieren. Wir helfen bei der Materialsuche.';
 
 export const faqs = [
   { question: 'Was kostet das Verlegen von Laminat, Vinyl oder Parkett?', answer: `Preise und Installationstermine besprechen wir telefonisch, weil jeder Untergrund und jeder Raum anders ist. Rufen Sie uns unter ${site.phone.display} an – die Beratung ist kostenlos und unverbindlich.` },
   { question: 'In welchem Umkreis arbeitet Tomas Bau & Sanierung?', answer: `Wir arbeiten von Wuppertal aus in einem Umkreis von rund ${site.serviceRadiusKm} km. Dazu gehören unter anderem Düsseldorf, Köln, Essen, Dortmund, Bochum, Duisburg, Solingen und Remscheid.` },
-  { question: 'Besorgen Sie auch das Material für den Bodenbelag?', answer: 'Ja. Wir finden den passenden Bodenbelag für Ihr Budget und verlegen ihn direkt – Material und Verlegung aus einer Hand, ein Ansprechpartner für das gesamte Projekt.' },
+  { question: 'Besorgen Sie auch das Material für den Bodenbelag?', answer: 'Wir helfen Ihnen, passendes Material für Ihr Budget zu finden, und übernehmen die Verlegung. Wir bieten handwerkliche Leistungen und Unterstützung bei der Materialsuche an, keinen Produktverkauf.' },
+  { question: 'Haben Sie einen Showroom oder verkaufen Sie Bodenbeläge?', answer: 'Nein. Wir haben keinen Showroom und verkaufen keine Produkte. Unser Angebot umfasst handwerkliche Arbeit, Reinigungsservice und Hilfe bei der Materialsuche. Bitte kontaktieren Sie uns, um Ihr Projekt zu besprechen.' },
+  { question: 'Bieten Sie auch Reinigungsarbeiten an?', answer: 'Ja, Sie können bei uns auch Reinigungsarbeiten anfragen. Welche Räume und Flächen dazugehören und wann die Reinigung stattfinden soll, besprechen wir persönlich mit Ihnen.' },
   { question: 'Kann altes Parkett abgeschliffen statt ersetzt werden?', answer: 'Das hängt vom Zustand und der verbleibenden Nutzschicht ab. Wenn der Boden dafür geeignet ist, schleifen wir Parkett und Dielen staubarm ab und versiegeln oder ölen sie neu. Gerne besprechen wir, ob eine Restaurierung für Ihren Boden infrage kommt.' },
 ];
 

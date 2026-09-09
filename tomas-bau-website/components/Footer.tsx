@@ -48,7 +48,7 @@ export default function Footer() {
         <nav aria-label="Leistungen">
           <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-white">Leistungen</h2>
           <ul className="space-y-2.5 text-sm">
-            {services.slice(0, 6).map((s) => (
+            {services.filter((service) => ['parkett-verlegen', 'vinylboden-verlegen', 'laminatboden-verlegen', 'bodeninstallation', 'bodenschleifen', 'reinigungsservice'].includes(service.slug)).map((s) => (
               <li key={s.slug}>
                 <a href={`/#service-${s.slug}`} className="transition-colors hover:text-teal">
                   {s.title}
@@ -75,6 +75,11 @@ export default function Footer() {
             <p>
               <a href={site.phone.href} className="font-bold text-white transition-colors hover:text-teal">
                 {site.phone.display}
+              </a>
+            </p>
+            <p>
+              <a href={site.phone.whatsapp} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-teal">
+                Nur WhatsApp:<br />{site.phone.whatsappDisplay}
               </a>
             </p>
             <p>

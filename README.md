@@ -29,7 +29,7 @@
 
 This repository contains the complete source code for the official marketing and customer acquisition website of **Tomas Bau & Sanierung** (located at Werth 22, 42275 Wuppertal, Germany).
 
-The business specializes in professional flooring installation (laminate, vinyl, hardwood parquet, herringbone, design floors), low-dust parquet sanding and refinishing, screed leveling, subfloor preparation, and full removal/disposal of old floors—offering turnkey material procurement and craftmanship from a single source.
+The business specializes in professional flooring installation (laminate, vinyl, hardwood parquet, herringbone, design floors), low-dust parquet sanding and refinishing, screed leveling, subfloor preparation, and full removal/disposal of old floors—offering workmanship and help finding materials, with no product sales or physical showroom.
 
 The website was engineered with a strict focus on lightning-fast performance, high mobile conversion rates, and uncompromising Local SEO for Wuppertal and the broader Rhine-Ruhr metropolitan region.
 
@@ -45,7 +45,7 @@ The website was engineered with a strict focus on lightning-fast performance, hi
   - Multi-category filtering (*Before / After*, *Finished Rooms*, *In Progress*).
   - Accessible native HTML5 `<dialog>` lightbox modal with full keyboard navigation (Left/Right arrow keys, Escape) and click-outside backdrop dismissal.
   - Real project photography using Next.js `Image` optimization (AVIF/WebP) with hero preloading and lazy loading.
-- **🛠️ Comprehensive Service Catalog (9 Core Services):**
+- **🛠️ Comprehensive Service Catalog (10 Core Services):**
   - Featured offerings with prominent visuals, plus native expandable service cards with deep-link anchor support (`#service-{slug}`).
 - **📍 Local SEO & Service Radius:**
   - Covers a 150 km operating radius with plain crawlable text indexing 26 key German cities (Düsseldorf, Cologne, Essen, Dortmund, Solingen, Remscheid, etc.).
@@ -154,7 +154,8 @@ export const site = {
   phone: {
     display: '+49 159 01039781',
     href: 'tel:+4915901039781',
-    whatsapp: 'https://wa.me/4915901039781',
+    whatsapp: 'https://wa.me/4917683135344',
+    whatsappDisplay: '+49 176 83135344',
   },
   email: 'bautomas23@gmail.com',
   address: {
@@ -187,7 +188,7 @@ The website is engineered for top placement in Google Search and Google Local (M
 
 - **Schema.org JSON-LD (`StructuredData.tsx`):**
   - `LocalBusiness` / `HomeAndConstructionBusiness`: Validates consistent NAP data, GPS coordinates (`51.2735, 7.1668`), opening hours, and operating radius.
-  - `Service`: Machine-readable catalog describing all 9 flooring and renovation services.
+  - `Service`: Machine-readable catalog describing all 10 flooring, renovation, and cleaning services.
   - `FAQPage`: Synchronizes visible customer FAQ answers into rich snippet candidate data.
   - `WebSite`: Canonical web presence definition.
 - **Sitemap & Robots:**
@@ -226,3 +227,7 @@ The website is engineered for top placement in Google Search and Google Local (M
 
 Proprietary project for **Tomas Bau & Sanierung**. All rights reserved.  
 The embedded Inter font is licensed under the [SIL Open Font License (OFL)](file:///Users/aarushgupta/Desktop/Albin%20/tomas-bau-website/app/fonts/OFL.txt).
+
+## September 2026 content update
+
+The five new project photos from `media/` are prepared in `public/images/` with screenshot borders removed. They appear first in the gallery; the radiator detail pair also illustrates precision on the homepage. Cleaning and floor sanding are highlighted services. The business provides labor and help finding materials, with no product sales or showroom. Calls use +49 159 01039781; +49 176 83135344 is exclusively for WhatsApp.

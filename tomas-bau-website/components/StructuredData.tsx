@@ -46,7 +46,7 @@ export default function StructuredData() {
       slogan: site.tagline,
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Bodenleger-Leistungen',
+        name: 'Bodenleger- und Reinigungsleistungen',
         itemListElement: services.map((s) => ({
           '@type': 'Offer',
           itemOffered: {

@@ -45,7 +45,7 @@ The web platform is built for maximum load speed, high mobile conversion rates, 
   - Multi-category filtering (*Before / After*, *Finished Rooms*, *In Progress*).
   - Accessible native HTML5 `<dialog>` lightbox modal with keyboard controls (Arrow keys, Escape) and click-outside dismissal.
   - Real project images utilizing Next.js `Image` optimization (AVIF/WebP) with hero preloading and lazy loading.
-- **🛠️ 9 Core Services:**
+- **🛠️ 10 Core Services:**
   - Key offerings with rich imagery and native expandable detail cards with anchor links (`#service-{slug}`).
 - **📍 Local SEO & Service Radius:**
   - Crawlable coverage across 26 major cities within 150 km of Wuppertal.
@@ -146,7 +146,8 @@ export const site = {
   phone: {
     display: '+49 159 01039781',
     href: 'tel:+4915901039781',
-    whatsapp: 'https://wa.me/4915901039781',
+    whatsapp: 'https://wa.me/4917683135344',
+    whatsappDisplay: '+49 176 83135344',
   },
   email: 'bautomas23@gmail.com',
   address: {
@@ -177,7 +178,7 @@ NEXT_PUBLIC_SITE_URL=https://www.tomasbau.de
 
 - **Schema.org JSON-LD (`StructuredData.tsx`):**
   - `LocalBusiness` / `HomeAndConstructionBusiness`: Validates NAP consistency, geographic coordinates, opening hours, and service radius.
-  - `Service`: Structured index of the 9 flooring and renovation offerings.
+  - `Service`: Structured index of the 10 flooring, renovation, and cleaning offerings.
   - `FAQPage`: Reflects customer FAQs into Google rich result candidate format.
   - `WebSite`: Canonical web presence definition.
 - **Sitemap & Robots:**
@@ -216,3 +217,7 @@ NEXT_PUBLIC_SITE_URL=https://www.tomasbau.de
 
 Proprietary project for **Tomas Bau & Sanierung**. All rights reserved.  
 The embedded Inter font is licensed under the [SIL Open Font License (OFL)](file:///Users/aarushgupta/Desktop/Albin%20/tomas-bau-website/app/fonts/OFL.txt).
+
+## September 2026 content update
+
+The five new project photos from `media/` are prepared in `public/images/` with screenshot borders removed. They appear first in the gallery; the radiator detail pair also illustrates precision on the homepage. Cleaning and floor sanding are highlighted services. The business provides labor and help finding materials, with no product sales or showroom. Calls use +49 159 01039781; +49 176 83135344 is exclusively for WhatsApp.
