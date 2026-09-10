@@ -15,7 +15,7 @@ export default function HomePage() {
         <div className="hero-shade" />
         <div className="container-page relative z-10">
           <div className="hero-copy">
-            <h1 id="hero-title">Ihr Bodenbelag-Experte in <span className="text-teal-400">Wuppertal.</span></h1>
+            <h1 id="hero-title">Ihr Partner für <span className="text-teal-400">Renovierungen</span></h1>
             <p className="mt-7 max-w-lg text-lg leading-relaxed text-white/80">Ein neuer Boden. Ein neues Raumgefühl. Wir verlegen Parkett, Vinyl und Laminat – und geben alten Holzböden ihren Charakter zurück.</p>
             <div className="mt-9 flex flex-wrap gap-3">
               <a href={site.phone.href} className="btn-red">Jetzt anrufen <Arrow /></a>
