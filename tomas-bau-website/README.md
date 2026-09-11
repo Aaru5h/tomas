@@ -52,7 +52,7 @@ The web platform is built for maximum load speed, high mobile conversion rates, 
 - **📋 Transparent FAQ Accordion:**
   - Addressing pricing, material options, restoration feasibility, and regional coverage.
 - **✉️ Accessible Inquiry Form:**
-  - Generates a pre-filled `mailto:` client message without intermediate data tracking.
+  - Submits inquiries through the Next.js `/api/kontakt` route with server validation and Resend email delivery. See [contact setup](CONTACT_SETUP.md).
 - **🔒 GDPR / DSGVO Compliant by Design:**
   - Self-hosted Inter font (WOFF2) with zero remote font server calls.
   - Zero tracking cookies or invasive third-party scripts.

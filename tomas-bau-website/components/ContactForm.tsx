@@ -1,36 +1,54 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { site } from '@/lib/site';
 
-/**
- * Prototype form: composes a pre-filled mail in the visitor's mail client.
- * No backend, no API key, no third-party request — nothing to configure to demo it.
- *
- * ponytail: swap this handler for a POST to /api/kontakt (Resend/Web3Forms)
- * when the site goes live. The markup and validation stay as-is.
- */
 export default function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle');
+  const [feedback, setFeedback] = useState('');
+  const submitting = useRef(false);
+  const submission = useRef<{ body: string; key: string } | null>(null);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const name = String(data.get('name') ?? '');
-    const phone = String(data.get('telefon') ?? '');
-    const message = String(data.get('nachricht') ?? '');
-
-    const body = `Name: ${name}\nTelefon: ${phone}\n\n${message}`;
-    window.location.href =
-      `mailto:${site.email}` +
-      `?subject=${encodeURIComponent(`Anfrage von ${name}`)}` +
-      `&body=${encodeURIComponent(body)}`;
-
-    setSent(true);
+    if (submitting.current) return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const body = JSON.stringify(Object.fromEntries(data));
+    submitting.current = true;
+    setStatus('pending');
+    setFeedback('Ihre Anfrage wird gesendet …');
+    try {
+      if (submission.current?.body !== body) submission.current = { body, key: crypto.randomUUID() };
+      const response = await fetch('/api/kontakt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Idempotency-Key': submission.current.key },
+        body,
+        signal: AbortSignal.timeout(15000),
+      });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true) {
+        throw new Error(typeof result.message === 'string' ? result.message : 'Der Versand ist fehlgeschlagen. Bitte versuchen Sie es erneut.');
+      }
+      setStatus('success');
+      setFeedback(result.message);
+      form.reset();
+      submission.current = null;
+    } catch (error) {
+      setStatus('error');
+      setFeedback(error instanceof Error && error.name === 'Error' ? error.message : 'Der Versand konnte nicht bestätigt werden. Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut.');
+    } finally {
+      submitting.current = false;
+    }
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
+    <form onSubmit={onSubmit} aria-busy={status === 'pending'} className="space-y-4">
+      <fieldset disabled={status === 'pending'} className="space-y-4 disabled:opacity-70">
+      <div hidden aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" tabIndex={-1} autoComplete="off" />
+      </div>
       <div>
         <label htmlFor="name" className="mb-1.5 block text-sm font-semibold text-brand-navy">
           Name
@@ -41,6 +59,8 @@ export default function ContactForm() {
           type="text"
           required
           autoComplete="name"
+          minLength={2}
+          maxLength={100}
           placeholder="Ihr Name"
           className="w-full rounded-lg border border-brand-navy/15 bg-white px-4 py-3 text-base outline-none transition-colors placeholder:text-brand-navy/60 focus:border-teal focus:ring-2 focus:ring-teal/20"
         />
@@ -56,6 +76,8 @@ export default function ContactForm() {
           type="tel"
           required
           autoComplete="tel"
+          minLength={6}
+          maxLength={40}
           placeholder="+49 …"
           className="w-full rounded-lg border border-brand-navy/15 bg-white px-4 py-3 text-base outline-none transition-colors placeholder:text-brand-navy/60 focus:border-teal focus:ring-2 focus:ring-teal/20"
         />
@@ -69,19 +91,23 @@ export default function ContactForm() {
           id="nachricht"
           name="nachricht"
           rows={5}
+          minLength={10}
+          maxLength={5000}
           required
           placeholder="Welcher Boden, welche Fläche, welcher Ort?"
           className="w-full resize-y rounded-lg border border-brand-navy/15 bg-white px-4 py-3 text-base outline-none transition-colors placeholder:text-brand-navy/60 focus:border-teal focus:ring-2 focus:ring-teal/20"
         />
       </div>
 
-      <button type="submit" className="btn-red w-full">
-        E-Mail vorbereiten
+      <button type="submit" className="btn-red w-full disabled:cursor-wait">
+        {status === 'pending' ? 'Wird gesendet …' : 'Anfrage senden'}
       </button>
+      </fieldset>
 
-      <p aria-live="polite" className="min-h-[1.25rem] text-sm text-teal-700">
-        {sent ? `Bitte senden Sie die vorbereitete Nachricht in Ihrem E-Mail-Programm ab. Falls es sich nicht öffnet, schreiben Sie direkt an ${site.email}.` : ''}
+      <p role="status" aria-live="polite" className={`min-h-[1.25rem] text-sm ${status === 'error' ? 'text-brand-redDark' : 'text-teal-700'}`}>
+        {feedback}
       </p>
+      <noscript><p>Zum Senden über das Formular benötigen Sie JavaScript. Bitte kontaktieren Sie uns per E-Mail oder Telefon.</p></noscript>
 
       <p className="text-sm leading-relaxed text-brand-navy/70">Alternativ: <a href={`mailto:${site.email}`} className="underline">{site.email}</a>. Hinweise zum Umgang mit Ihren Daten finden Sie im <a href="/datenschutz" className="underline">Datenschutz</a>.</p>
 

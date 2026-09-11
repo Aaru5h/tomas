@@ -52,7 +52,7 @@ The website was engineered with a strict focus on lightning-fast performance, hi
 - **📋 Transparent FAQ Accordion:**
   - Answers common customer questions on pricing, material procurement, sanding feasibility, and service areas.
 - **✉️ Accessible Inquiry Form:**
-  - Generates pre-formatted `mailto:` client requests without transmitting customer data through untrusted third-party servers.
+  - Submits inquiries through the Next.js `/api/kontakt` route with server validation and Resend email delivery. See [contact setup](tomas-bau-website/CONTACT_SETUP.md).
 - **🔒 GDPR / DSGVO Compliant by Design:**
   - Self-hosted Inter font (WOFF2) with zero requests to Google Fonts CDNs.
   - No tracking cookies or invasive third-party analytics scripts required.
