@@ -69,6 +69,18 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
+          <Link
+            href="/login"
+            className="text-[15px] font-semibold text-brand-navy/80 transition-colors hover:text-teal"
+          >
+            Anmelden
+          </Link>
+          <Link
+            href="/signup"
+            className="rounded-lg bg-teal px-4 py-2 text-[15px] font-semibold text-white transition-colors hover:bg-teal-600"
+          >
+            Registrieren
+          </Link>
           <a
             href={site.phone.href}
             className="btn-red !px-5 !py-3 !text-[15px]"
@@ -125,14 +137,30 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <a
-            href={site.phone.href}
-            className="btn-red mt-5 w-full"
-            onClick={() => setOpen(false)}
-          >
-            <PhoneIcon />
-            {site.phone.display}
-          </a>
+          <div className="mt-5 flex flex-col gap-3">
+            <Link
+              href="/login"
+              onClick={() => setOpen(false)}
+              className="block rounded-lg border border-brand-navy py-3 text-center text-lg font-semibold text-brand-navy"
+            >
+              Anmelden
+            </Link>
+            <Link
+              href="/signup"
+              onClick={() => setOpen(false)}
+              className="block rounded-lg bg-teal py-3 text-center text-lg font-semibold text-white"
+            >
+              Registrieren
+            </Link>
+            <a
+              href={site.phone.href}
+              className="btn-red w-full"
+              onClick={() => setOpen(false)}
+            >
+              <PhoneIcon />
+              {site.phone.display}
+            </a>
+          </div>
         </nav>
       </div>
     </header>

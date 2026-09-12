@@ -65,33 +65,83 @@ Thumbs.db
 *.swo
 *~
 
-# AI Assistants, Agents & LLM Tools
-.agents/
+# AI Assistants, LLM Tools & Agent Frameworks
+# Claude Code & Anthropic
+CLAUDE.md
+CLAUDE_*.md
+claude.md
 .claude/
+.claudeignore
 .claude.json
 claude.json
+.anthropic/
+
+# Model Context Protocol (MCP)
+.mcp.json
+mcp.json
+.mcp/
+
+# Ruflo, Claude-Flow, Swarm & Ruvector
+.claude-flow/
+.swarm/
+ruvector.db*
+*.ruvector
+.ruflo/
+ruflo.json
+
+# Claude Token Optimizer (CTO)
+.cto/
+.cto*
+docs/INDEX.md
+docs/learnings/
+
+# Agent Frameworks & Skills
+.agents/
 skills-lock.json
+.agent/
+.agent-memory/
 .gemini/
+
+# Devin AI
+.devin/
+.devin*
+
+# Cursor, Windsurf & Codeium
 .cursor/
 .cursorrules
 .cursorindexing/
 .windsurf/
 .codeium/
+
+# Aider, Continue, Cline, Roo & GitHub Copilot
 .aider*
 .continue/
 .cline/
 .roo/
 .chat/
 .copilot/
+.github/copilot-instructions.md
+
+# Prompts, Vector Databases & Local Models
 *.prompt
 *.prompt.md
+.prompt/
+.prompts/
 .chroma/
 .qdrant/
 *.gguf
 *.safetensors
 *.onnx
 
+# Other AI Tools
+.v0/
+.bolt/
+.llm/
+.openai/
+
 # Internal / Handoff documentation
 HANDOFF.md
 *HANDOFF*.md
 handoff.md
+
+.claudeignore
