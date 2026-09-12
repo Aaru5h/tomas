@@ -37,29 +37,29 @@ export default function Header() {
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-shadow duration-300 ${
-        scrolled ? 'bg-white shadow-md' : 'bg-white/95 backdrop-blur-sm'
+        scrolled ? 'bg-white shadow-sm' : 'bg-white'
       }`}
     >
-      <div className="container-page flex h-20 items-center justify-between gap-4">
-        <Link href="/" className="shrink-0" aria-label={`${site.name} – Startseite`}>
+      <div className="mx-auto flex h-20 w-full max-w-screen-2xl items-center gap-4 px-5 sm:gap-6 sm:px-6 lg:px-8">
+        <Link href="/" className="flex shrink-0 items-center rounded-sm" aria-label={`${site.name} – Startseite`}>
           <Image
             src="/images/logo.png"
             alt={`${site.name} Logo – Bodenleger in Wuppertal`}
             width={1025}
             height={330}
             priority
-            sizes="(max-width: 639px) 125px, 150px"
-            className="h-10 w-auto sm:h-12"
+            sizes="(max-width: 639px) 128px, 144px"
+            className="h-auto w-32 sm:w-36"
           />
         </Link>
 
-        <nav aria-label="Hauptnavigation" className="hidden xl:block">
-          <ul className="flex items-center gap-5">
+        <nav aria-label="Hauptnavigation" className="mx-auto hidden xl:block">
+          <ul className="flex items-center gap-1 2xl:gap-2">
             {navLinks.map((l) => (
               <li key={l.href}>
                 <a
                   href={`/${l.href}`}
-                  className="text-[15px] font-semibold text-brand-navy/80 transition-colors hover:text-teal"
+                  className="inline-flex min-h-11 items-center whitespace-nowrap rounded-md px-2 text-sm font-semibold text-brand-navy/80 transition-colors hover:bg-teal-50 hover:text-teal-700 2xl:px-3"
                 >
                   {l.label}
                 </a>
@@ -68,22 +68,24 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="ml-auto flex shrink-0 items-center gap-3 xl:ml-0">
+          <div className="hidden items-center gap-1 border-r border-brand-navy/15 pr-3 xl:flex">
           <Link
             href="/login"
-            className="text-[15px] font-semibold text-brand-navy/80 transition-colors hover:text-teal"
+            className="inline-flex min-h-11 items-center rounded-md px-3 text-sm font-semibold text-brand-navy/80 transition-colors hover:bg-teal-50 hover:text-teal-700"
           >
             Anmelden
           </Link>
           <Link
             href="/signup"
-            className="rounded-lg bg-teal px-4 py-2 text-[15px] font-semibold text-white transition-colors hover:bg-teal-600"
+            className="inline-flex min-h-11 items-center rounded-md px-3 text-sm font-semibold text-teal-700 transition-colors hover:bg-teal-50"
           >
             Registrieren
           </Link>
+          </div>
           <a
             href={site.phone.href}
-            className="btn-red !px-5 !py-3 !text-[15px]"
+            className="btn-red hidden min-h-11 whitespace-nowrap !px-4 !py-3 !text-sm sm:inline-flex"
             aria-label={`Jetzt anrufen: ${site.phone.display}`}
           >
             <PhoneIcon />
@@ -95,7 +97,7 @@ export default function Header() {
           ref={toggleRef}
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-lg text-brand-navy xl:hidden"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-navy/15 text-brand-navy transition-colors hover:bg-teal-50 hover:text-teal-700 xl:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
@@ -123,38 +125,38 @@ export default function Header() {
         hidden={!open}
         className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-black/5 bg-white xl:hidden"
       >
-        <nav aria-label="Mobile Navigation" className="container-page pb-24 pt-4 md:pb-4">
-          <ul className="flex flex-col">
+        <nav aria-label="Mobile Navigation" className="container-page pb-24 pt-3 md:pb-6">
+          <ul className="grid sm:grid-cols-2 sm:gap-x-8">
             {navLinks.map((l) => (
               <li key={l.href}>
                 <a
                   href={`/${l.href}`}
                   onClick={() => setOpen(false)}
-                  className="block border-b border-black/5 py-4 text-lg font-semibold text-brand-navy"
+                  className="flex min-h-12 items-center border-b border-brand-navy/10 py-3 text-base font-semibold text-brand-navy transition-colors hover:text-teal-700"
                 >
                   {l.label}
                 </a>
               </li>
             ))}
           </ul>
-          <div className="mt-5 flex flex-col gap-3">
+          <div className="mt-6 grid grid-cols-2 gap-3">
             <Link
               href="/login"
               onClick={() => setOpen(false)}
-              className="block rounded-lg border border-brand-navy py-3 text-center text-lg font-semibold text-brand-navy"
+              className="flex min-h-12 items-center justify-center rounded-lg border border-brand-navy/20 px-3 py-3 text-sm font-semibold text-brand-navy transition-colors hover:bg-stone-50"
             >
               Anmelden
             </Link>
             <Link
               href="/signup"
               onClick={() => setOpen(false)}
-              className="block rounded-lg bg-teal py-3 text-center text-lg font-semibold text-white"
+              className="flex min-h-12 items-center justify-center rounded-lg bg-teal-50 px-3 py-3 text-sm font-semibold text-teal-700 transition-colors hover:bg-teal-100"
             >
               Registrieren
             </Link>
             <a
               href={site.phone.href}
-              className="btn-red w-full"
+              className="btn-red col-span-2 w-full"
               onClick={() => setOpen(false)}
             >
               <PhoneIcon />
