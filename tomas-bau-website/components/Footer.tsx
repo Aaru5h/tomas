@@ -13,6 +13,7 @@ export default function Footer() {
             width={1025}
             height={330}
             loading="lazy"
+            sizes="137px"
             className="h-11 w-auto brightness-0 invert"
           />
           <p className="mt-5 max-w-xs text-sm leading-relaxed">

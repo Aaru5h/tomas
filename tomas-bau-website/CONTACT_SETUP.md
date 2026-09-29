@@ -11,7 +11,7 @@ a plain-text email through Resend. No Express service or database is required.
 2. Create a Resend API key with sending permission and verify your sending domain.
 3. Set `RESEND_API_KEY` and `CONTACT_FROM_EMAIL` (an address on that verified domain).
    `CONTACT_TO_EMAIL` defaults to the business email in `lib/site.ts`.
-4. Set `NEXT_PUBLIC_SITE_URL` to the production origin. Rebuild and restart.
+4. The production origin is fixed to `https://www.bautomas.de` in `lib/site.ts`. Rebuild and restart after approved code changes.
 5. Deploy as a Next.js Node/serverless app, not a static export.
 6. Submit an inquiry you control and verify receipt in the business inbox.
 

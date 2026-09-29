@@ -8,8 +8,9 @@
 export const site = {
   name: 'Tomas Bau & Sanierung',
   legalName: 'Tomas Bau & Sanierung',
-  // Change here (or set NEXT_PUBLIC_SITE_URL) when the real domain goes live.
-  url: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.tomasbau.de').origin,
+  // Fixed production origin: stale deployment variables must not change canonicals.
+  url: 'https://www.bautomas.de',
+  alternateNames: ['Tomas Bau', 'Bau Tomas'],
   tagline: 'Ihr Bodenbelag-Experte in Wuppertal',
   yearsExperience: 7,
 
@@ -314,7 +315,7 @@ export const serviceAreas = [
 ];
 
 export const description =
-  'Bodenleger und Reinigungsservice in Wuppertal: Parkett, Vinyl und Laminat verlegen, Böden schleifen und sanieren. Wir helfen bei der Materialsuche.';
+  'Tomas Bau & Sanierung (Bau Tomas) in Wuppertal: Parkett, Vinyl und Laminat verlegen, Böden schleifen, restaurieren und reinigen. Jetzt Kontakt aufnehmen.';
 
 export const faqs = [
   { question: 'Was kostet das Verlegen von Laminat, Vinyl oder Parkett?', answer: `Preise und Installationstermine besprechen wir telefonisch, weil jeder Untergrund und jeder Raum anders ist. Rufen Sie uns unter ${site.phone.display} an – die Beratung ist kostenlos und unverbindlich.` },

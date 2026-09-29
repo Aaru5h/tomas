@@ -6,12 +6,13 @@ export default function StructuredData() {
 
   const graph = [
     {
-      '@type': ['LocalBusiness', 'HomeAndConstructionBusiness', 'GeneralContractor'],
+      '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
       '@id': businessId,
       name: site.name,
+      alternateName: site.alternateNames,
       legalName: site.legalName,
       description,
-      url: site.url,
+      url: `${site.url}/`,
       telephone: site.phone.e164,
       email: site.email,
       image: `${site.url}/images/og-image.jpg`,
@@ -32,7 +33,7 @@ export default function StructuredData() {
       hasMap: mapsLink,
       openingHoursSpecification: site.openingHours.schema,
       sameAs: [site.instagram.url],
-      areaServed: {
+      areaServed: [{ '@type': 'City', name: site.address.city }, {
         '@type': 'GeoCircle',
         geoMidpoint: {
           '@type': 'GeoCoordinates',
@@ -41,7 +42,7 @@ export default function StructuredData() {
         },
         geoRadius: site.serviceRadiusKm * 1000,
         description: `${site.address.city} und ${site.serviceRadiusKm} km Umgebung`,
-      },
+      }],
       knowsLanguage: ['de-DE'],
       slogan: site.tagline,
       hasOfferCatalog: {
@@ -72,14 +73,18 @@ export default function StructuredData() {
     {
       '@type': 'WebSite',
       '@id': `${site.url}/#website`,
-      url: site.url,
+      url: `${site.url}/`,
       name: site.name,
+      alternateName: site.alternateNames,
       inLanguage: 'de-DE',
       publisher: { '@id': businessId },
     },
     {
       '@type': 'FAQPage',
       '@id': `${site.url}/#faq`,
+      url: `${site.url}/#faq`,
+      inLanguage: 'de-DE',
+      isPartOf: { '@id': `${site.url}/#website` },
       mainEntity: faqs.map((faq) => ({
         '@type': 'Question',
         name: faq.question,

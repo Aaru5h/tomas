@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import { site, description } from '@/lib/site';
+import { site } from '@/lib/site';
+import { pageMetadata } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MobileCallBar from '@/components/MobileCallBar';
@@ -15,51 +16,10 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: 'Bodenleger in Wuppertal | Tomas Bau & Sanierung',
-    template: '%s | Tomas Bau & Sanierung Wuppertal',
-  },
-  description,
+  ...pageMetadata('/'),
   authors: [{ name: site.name }],
   creator: site.name,
   publisher: site.name,
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'de_DE',
-    url: site.url,
-    siteName: site.name,
-    title: 'Bodenleger in Wuppertal | Tomas Bau & Sanierung',
-    description,
-    images: [
-      {
-        url: '/images/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Tomas Bau & Sanierung – Bodenleger in Wuppertal, von alt bis neu',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Bodenleger Wuppertal | Tomas Bau & Sanierung',
-    description,
-    images: ['/images/og-image.jpg'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
   category: 'Bodenleger',
   icons: {
     icon: [{ url: '/images/icon.png', type: 'image/png' }],
