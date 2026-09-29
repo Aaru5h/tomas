@@ -29,6 +29,7 @@ Read-only live HTTP checks found:
 | `components/Footer.tsx` | Add a 137px responsive image size hint matching the existing logo display width; no style changes. |
 | `README.md`, `CONTACT_SETUP.md` | Correct project setup instructions so old domain/environment guidance does not reintroduce the issue. |
 | `scripts/verify-seo.py` (new) | Read-only local HTTP smoke checks for metadata, crawl rules, sitemap, links, fragments, image alt attributes and JSON-LD/visible-content parity. |
+| `public/googlee5fdeb82491fc842.html` (new) | Google Search Console HTML ownership-verification file supplied by the site owner. It becomes available at the domain root after deployment. |
 | `SEO-AUDIT.md` (new) | This audit and deployment handoff. |
 
 `app/robots.ts` already allows all crawlers and consumes `site.url`; its generated response is corrected by the origin fix without editing the file. The Instagram handle `tomasbau.de` is deliberately retained: it is a social profile, not a canonical domain. No CSS, business facts, contact details, forms, DNS/MX, account settings or deployment changes were made.
