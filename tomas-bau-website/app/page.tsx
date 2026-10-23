@@ -48,7 +48,9 @@ export default function HomePage() {
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {['bodenschleifen', 'reinigungsservice'].map((slug) => {
               const service = services.find((item) => item.slug === slug)!;
-              return <article key={slug} id={`service-${slug}`} className="border-t border-brand-navy/15 pt-7"><h3 className="text-xl font-bold">{service.title}</h3><p className="mt-3 max-w-prose leading-relaxed text-brand-navy/75">{service.body}</p><a href="#kontakt" className="mt-5 inline-flex items-center gap-3 font-semibold text-teal-700 underline underline-offset-4">{slug === 'bodenschleifen' ? 'Bodenschleifen anfragen' : 'Reinigung anfragen'} <Arrow /></a></article>;
+              return <article key={slug} id={`service-${slug}`} className="border-t border-brand-navy/15 pt-7">{slug === 'bodenschleifen' && <div className="mb-6 grid grid-cols-2 gap-3">
+                {[{ src: 'parkett-schleifmaschine.jpg', caption: 'Parkett abschleifen', alt: 'Parkettschleifmaschine mit Staubsack auf einem hellen Holzboden' }, { src: 'parkett-frisch-versiegelt.jpg', caption: 'Oberfläche versiegeln', alt: 'Parkettboden mit glänzender Oberfläche nach der Beschichtung' }].map((photo) => <figure key={photo.src}><div className="relative aspect-[3/4] overflow-hidden rounded-xl"><Image src={`/images/${photo.src}`} alt={photo.alt} fill sizes="(max-width: 767px) 45vw, 23vw" className="object-cover" /></div><figcaption className="mt-3 text-sm font-semibold">{photo.caption}</figcaption></figure>)}
+              </div>}<h3 className="text-xl font-bold">{service.title}</h3><p className="mt-3 max-w-prose leading-relaxed text-brand-navy/75">{service.body}</p><a href="#kontakt" className="mt-5 inline-flex items-center gap-3 font-semibold text-teal-700 underline underline-offset-4">{slug === 'bodenschleifen' ? 'Bodenschleifen anfragen' : 'Reinigung anfragen'} <Arrow /></a></article>;
             })}
           </div>
           <div className="mt-14 grid border-t border-brand-navy/15 md:grid-cols-2 md:gap-x-12">

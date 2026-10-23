@@ -149,12 +149,60 @@ export type GalleryItem = {
   src: string;
   alt: string;
   caption: string;
-  category: 'vorher-nachher' | 'fertige-raeume' | 'in-arbeit';
+  category: 'vorher-nachher' | 'fertige-raeume' | 'in-arbeit' | 'bodenschleifen';
   width: number;
   height: number;
 };
 
 export const gallery: GalleryItem[] = [
+  {
+    src: '/images/parkett-schleifmaschine.jpg',
+    alt: 'Parkettschleifmaschine mit Staubsack auf einem hellen Holzboden',
+    caption: 'Parkett abschleifen – die Maschine',
+    category: 'bodenschleifen',
+    width: 1536,
+    height: 2048,
+  },
+  {
+    src: '/images/parkett-geschliffen-raum.jpg',
+    alt: 'Heller abgeschliffener Parkettboden hinter einem abgesperrten Durchgang',
+    caption: 'Parkett nach dem Abschliff',
+    category: 'bodenschleifen',
+    width: 1536,
+    height: 2048,
+  },
+  {
+    src: '/images/parkett-schleifarbeiten.jpg',
+    alt: 'Schleifmaschine auf einem Parkettboden während der Sanierung',
+    caption: 'Parkettsanierung – in Arbeit',
+    category: 'bodenschleifen',
+    width: 1536,
+    height: 2048,
+  },
+  {
+    src: '/images/parkett-frisch-versiegelt.jpg',
+    alt: 'Frisch beschichteter Parkettboden mit glänzender Oberfläche in einem Raum mit roter Wand',
+    caption: 'Parkett nach der Oberflächenbehandlung',
+    category: 'bodenschleifen',
+    width: 1536,
+    height: 2048,
+  },
+  {
+    src: '/images/parkett-versiegelung-detail.jpg',
+    alt: 'Lichtreflexion auf der frisch beschichteten Parkettoberfläche am Fenster',
+    caption: 'Oberflächenbehandlung im Detail',
+    category: 'bodenschleifen',
+    width: 1152,
+    height: 2048,
+  },
+  {
+    src: '/images/parkett-sanierung-raum.jpg',
+    alt: 'Heller Parkettboden mit beleuchtetem Übergang zwischen zwei Räumen',
+    caption: 'Parkettsanierung – Blick in die Räume',
+    category: 'bodenschleifen',
+    width: 1536,
+    height: 2048,
+  },
   {
     src: '/images/parkett-rohr-zuschnitt.jpg',
     alt: 'Zugeschnittene Parkettdielen mit Aussparungen für ein Heizungsrohr',
@@ -279,6 +327,7 @@ export const gallery: GalleryItem[] = [
 
 export const galleryCategories = [
   { id: 'alle', label: 'Alle Projekte' },
+  { id: 'bodenschleifen', label: 'Bodenschleifen & Parkettsanierung' },
   { id: 'vorher-nachher', label: 'Vorher / Nachher' },
   { id: 'fertige-raeume', label: 'Fertige Räume' },
   { id: 'in-arbeit', label: 'In Arbeit' },
