@@ -3,10 +3,8 @@
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
-  const router = useRouter();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -40,10 +38,8 @@ export default function SignupPage() {
       return;
     }
 
-    // ponytail: auto-login after signup
-    await signIn('credentials', { email, password, redirect: false });
-    router.push('/');
-    router.refresh();
+    setLoading(false);
+    setError('Konto erstellt. Bitte bestätigen Sie Ihre E-Mail-Adresse über den Link in Ihrem Postfach und melden Sie sich dann an.');
   }
 
   return (
@@ -96,7 +92,7 @@ export default function SignupPage() {
             name="password"
             type="password"
             required
-            minLength={8}
+            minLength={10}
             className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
           />
         </div>
@@ -110,7 +106,7 @@ export default function SignupPage() {
             name="confirm"
             type="password"
             required
-            minLength={8}
+            minLength={10}
             className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
           />
         </div>

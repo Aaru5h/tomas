@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { site, navLinks } from '@/lib/site';
+import { signOut } from 'next-auth/react';
 
-export default function Header() {
+export default function Header({ userName }: { userName: string | null }) {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -70,6 +71,7 @@ export default function Header() {
 
         <div className="ml-auto flex shrink-0 items-center gap-3 xl:ml-0">
           <div className="hidden items-center gap-1 border-r border-brand-navy/15 pr-3 xl:flex">
+          {userName ? <><Link href="/bewertungen#bewertung-schreiben" className="px-3 text-sm font-semibold text-teal-700">{userName}</Link><button onClick={() => signOut({ callbackUrl: '/' })} className="px-3 text-sm font-semibold">Abmelden</button></> : <>
           <Link
             href="/login"
             className="inline-flex min-h-11 items-center rounded-md px-3 text-sm font-semibold text-brand-navy/80 transition-colors hover:bg-teal-50 hover:text-teal-700"
@@ -82,6 +84,7 @@ export default function Header() {
           >
             Registrieren
           </Link>
+          </>}
           </div>
           <a
             href={site.phone.href}
@@ -140,6 +143,7 @@ export default function Header() {
             ))}
           </ul>
           <div className="mt-6 grid grid-cols-2 gap-3">
+            {userName ? <><Link href="/bewertungen#bewertung-schreiben" onClick={() => setOpen(false)} className="py-3 font-semibold text-teal-700">Meine Bewertung</Link><button onClick={() => signOut({ callbackUrl: '/' })} className="py-3 font-semibold">Abmelden</button></> : <>
             <Link
               href="/login"
               onClick={() => setOpen(false)}
@@ -154,6 +158,7 @@ export default function Header() {
             >
               Registrieren
             </Link>
+            </>}
             <a
               href={site.phone.href}
               className="btn-red col-span-2 w-full"

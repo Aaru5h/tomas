@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MobileCallBar from '@/components/MobileCallBar';
 import { Analytics } from '@vercel/analytics/next';
+import { auth } from '@/auth';
 
 const inter = localFont({
   src: './fonts/Inter-latin.woff2',
@@ -33,7 +34,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await auth();
   return (
     <html lang="de" className={inter.variable}>
       <body>
@@ -43,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Zum Hauptinhalt springen
         </a>
-        <Header />
+        <Header userName={session?.user?.name || session?.user?.email || null} />
         <main id="hauptinhalt">{children}</main>
         <Footer />
         <MobileCallBar />

@@ -16,8 +16,39 @@ model User {
   password      String?
   accounts      Account[]
   sessions      Session[]
+  role          UserRole  @default(USER)
+  reviews       Review[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum ReviewStatus {
+  PENDING
+  PUBLISHED
+  REJECTED
+}
+
+model Review {
+  id             String       @id @default(cuid())
+  userId         String       @unique
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating         Int
+  title          String?
+  body           String
+  status         ReviewStatus @default(PENDING)
+  moderationNote String?
+  moderatedBy    String?
+  moderatedAt    DateTime?
+  publishedAt    DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([status, publishedAt])
 }
 
 model Account {

@@ -4,9 +4,13 @@ import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 export default function LoginPage() {
   const router = useRouter();
+  const params = useSearchParams();
+  const callbackUrl = params.get('callbackUrl');
+  const destination = callbackUrl?.startsWith('/') && !callbackUrl.startsWith('//') ? callbackUrl : '/bewertungen';
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +30,7 @@ export default function LoginPage() {
       setError('Ungültige E-Mail oder Passwort.');
       setLoading(false);
     } else {
-      router.push('/');
+      router.push(destination);
       router.refresh();
     }
   }
@@ -36,7 +40,7 @@ export default function LoginPage() {
       <div className="text-center">
         <h1 className="text-2xl font-bold text-brand-navy">Anmelden</h1>
         <p className="mt-2 text-sm text-gray-600">
-          Melden Sie sich bei Ihrem Konto an
+          {params.get('verified') === '1' ? 'E-Mail bestätigt. Sie können sich jetzt anmelden.' : params.get('verified') === '0' ? 'Der Bestätigungslink ist ungültig oder abgelaufen.' : 'Melden Sie sich bei Ihrem Konto an'}
         </p>
       </div>
 
@@ -92,7 +96,7 @@ export default function LoginPage() {
       </div>
 
       <button
-        onClick={() => signIn('google', { callbackUrl: '/' })}
+        onClick={() => signIn('google', { callbackUrl: destination })}
         className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
       >
         <svg className="h-5 w-5" viewBox="0 0 24 24">

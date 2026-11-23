@@ -2,7 +2,10 @@ import Image from 'next/image';
 import Gallery from '@/components/Gallery';
 import ContactForm from '@/components/ContactForm';
 import StructuredData from '@/components/StructuredData';
+import { Reviews } from '@/components/Reviews';
 import { site, services, serviceAreas, faqs, mapsLink } from '@/lib/site';
+
+export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
   return (
@@ -76,6 +79,8 @@ export default function HomePage() {
       <section id="einsatzgebiet" className="section bg-brand-navy text-white"><div className="container-page grid gap-12 lg:grid-cols-2 lg:gap-20"><div><h2 className="h2">In Wuppertal zu Hause.<br /><span className="text-teal-400">In der Region für Sie da.</span></h2><p className="mt-6 max-w-lg leading-relaxed text-white/75">Wir arbeiten in einem Umkreis von rund {site.serviceRadiusKm} km – im Bergischen Land, im Rheinland und im Ruhrgebiet. Rufen Sie uns an, um Ihr Projekt und die Anfahrt zu besprechen.</p><a href={mapsLink} target="_blank" rel="noopener noreferrer" className="btn-outline mt-8">Standort in Google Maps öffnen <Arrow /></a><p className="mt-4 text-sm text-white/70">{site.address.street} · {site.address.postalCode} {site.address.city}<br />Kein Showroom · Bitte kontaktieren Sie uns vorab.</p></div><div><h3 className="mb-6 text-lg font-bold">Unser Einsatzgebiet</h3><ul className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-white/80">{serviceAreas.map((city) => <li key={city} className="border-b border-white/10 pb-2">{city}</li>)}</ul></div></div></section>
 
       <section id="faq" className="section"><div className="container-page grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20"><div><h2 className="h2">Fragen vor dem<br />ersten Schritt?</h2><p className="mt-5 leading-relaxed text-brand-navy/70">Hier finden Sie Antworten zu Material, Verlegung, Reinigung und unserem Einsatzgebiet.</p></div><div className="border-t border-brand-navy/15">{faqs.map((faq) => <details key={faq.question} className="service-detail"><summary>{faq.question}<span className="detail-plus" aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div></div></section>
+
+      <section id="bewertungen" className="section bg-white"><div className="container-page"><Reviews compact /></div></section>
 
       <section id="kontakt" className="section bg-stone-100"><div className="container-page grid gap-12 lg:grid-cols-2 lg:gap-20"><div><h2 className="h2">Was haben Sie<br />mit Ihrem Boden vor?</h2><p className="mt-6 max-w-md text-lg leading-relaxed text-brand-navy/75">Neuverlegung, Bodenschleifen, Reinigung oder eine erste Frage: Erzählen Sie uns von Ihrem Projekt.</p><a className="mt-8 inline-block text-2xl font-bold tracking-tight text-teal-700 sm:text-3xl" href={site.phone.href}>{site.phone.display}</a><p className="mt-4"><a href={site.phone.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex flex-wrap gap-x-2 font-semibold text-teal-700 underline underline-offset-4"><span>Nur WhatsApp:</span><span>{site.phone.whatsappDisplay}</span></a></p><p className="mt-3 text-sm text-brand-navy/70">{site.openingHours.label}<br />{site.openingHours.sundayLabel}</p><address className="mt-8 space-y-3 not-italic"><p><a className="underline underline-offset-4" href={`mailto:${site.email}`}>{site.email}</a></p><p>{site.name}<br /><a className="underline underline-offset-4" href={mapsLink} target="_blank" rel="noopener noreferrer">{site.address.street}, {site.address.postalCode} {site.address.city}</a></p></address>
           <figure className="mt-10 max-w-xs">
