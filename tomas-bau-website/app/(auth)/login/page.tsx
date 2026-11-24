@@ -1,8 +1,8 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
+import { getProviders, signIn } from 'next-auth/react';
 import Link from 'next/link';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 
@@ -13,6 +13,8 @@ export default function LoginPage() {
   const destination = callbackUrl?.startsWith('/') && !callbackUrl.startsWith('//') ? callbackUrl : '/bewertungen';
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [googleAvailable, setGoogleAvailable] = useState(false);
+  useEffect(() => { getProviders().then((providers) => setGoogleAvailable(Boolean(providers?.google))).catch(() => setGoogleAvailable(false)); }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,18 +22,22 @@ export default function LoginPage() {
     setError('');
 
     const formData = new FormData(e.currentTarget);
-    const res = await signIn('credentials', {
-      email: formData.get('email'),
-      password: formData.get('password'),
-      redirect: false,
-    });
-
-    if (res?.error) {
-      setError('Ungültige E-Mail oder Passwort.');
-      setLoading(false);
-    } else {
+    try {
+      const res = await signIn('credentials', {
+        email: formData.get('email'),
+        password: formData.get('password'),
+        redirect: false,
+      });
+      if (res?.error || !res?.ok) {
+        setError('Ungültige E-Mail oder Passwort.');
+        return;
+      }
       router.push(destination);
       router.refresh();
+    } catch {
+      setError('Die Anmeldung ist gerade nicht möglich. Bitte versuchen Sie es erneut.');
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -86,7 +92,7 @@ export default function LoginPage() {
         </button>
       </form>
 
-      <div className="relative">
+      {googleAvailable && <><div className="relative">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-gray-200" />
         </div>
@@ -119,6 +125,7 @@ export default function LoginPage() {
         </svg>
         Mit Google anmelden
       </button>
+      </>}
 
       <p className="text-center text-sm text-gray-600">
         Noch kein Konto?{' '}

@@ -3,13 +3,15 @@ import { prisma } from '@/lib/prisma';
 import { Reviews } from '@/components/Reviews';
 import { deleteReview, saveReview } from './actions';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/seo';
+import DeleteReviewButton from '@/components/DeleteReviewButton';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Bewertungen | Tomas Bau & Sanierung', description: 'Erfahrungen unserer Kunden und Ihre Bewertung zu Tomas Bau & Sanierung.' };
+export const metadata = pageMetadata('/bewertungen');
 
 export default async function Page({ searchParams }: { searchParams: { error?: string; sent?: string; deleted?: string } }) {
   const session = await auth();
-  const own = session?.user?.id ? await prisma.review.findUnique({ where: { userId: session.user.id } }) : null;
+  const own = session?.user?.id ? await prisma.review.findUnique({ where: { userId: session.user.id } }).catch((error: unknown) => { console.error('Own review unavailable', error); return null; }) : null;
   const notices: Record<string, string> = { invalid: 'Bitte prüfen Sie die Bewertung: 1–5 Sterne und 30–1500 Zeichen Text.', verify: 'Bitte bestätigen Sie zuerst Ihre E-Mail-Adresse.', wait: 'Bitte warten Sie eine Minute, bevor Sie erneut speichern.' };
   return <div className="section container-page"><h1 className="h2">Bewertungen</h1><p className="mt-4 max-w-2xl text-brand-navy/70">Lesen Sie, wie Kunden unsere Arbeit erlebt haben, und teilen Sie Ihre eigene Erfahrung.</p>
     <div className="mt-12"><Reviews /></div>
@@ -25,7 +27,7 @@ export default async function Page({ searchParams }: { searchParams: { error?: s
           <div><label htmlFor="body" className="block font-semibold">Ihre Erfahrung</label><textarea id="body" name="body" minLength={30} maxLength={1500} required rows={6} defaultValue={own?.body ?? ''} className="mt-2 w-full rounded-lg border border-brand-navy/25 p-3" /><p className="mt-1 text-sm text-brand-navy/65">30–1500 Zeichen. Bitte keine persönlichen Daten Dritter eintragen.</p></div>
           <button className="btn-red" type="submit">{own ? 'Bewertung aktualisieren' : 'Bewertung einreichen'}</button>
         </form>
-        {own && <form action={deleteReview} className="mt-6"><button type="submit" className="font-semibold text-red-700 underline underline-offset-4">Meine Bewertung löschen</button></form>}
+        {own && <form action={deleteReview} className="mt-6"><DeleteReviewButton /></form>}
       </>}
     </section>
   </div>;

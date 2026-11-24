@@ -25,7 +25,7 @@ export default function Header({ userName }: { userName: string | null }) {
         toggleRef.current?.focus();
       }
     };
-    const desktop = window.matchMedia('(min-width: 1280px)');
+    const desktop = window.matchMedia('(min-width: 1536px)');
     const onResize = () => { if (desktop.matches) setOpen(false); };
     window.addEventListener('keydown', onKey);
     desktop.addEventListener('change', onResize);
@@ -54,7 +54,7 @@ export default function Header({ userName }: { userName: string | null }) {
           />
         </Link>
 
-        <nav aria-label="Hauptnavigation" className="mx-auto hidden xl:block">
+        <nav aria-label="Hauptnavigation" className="mx-auto hidden 2xl:block">
           <ul className="flex items-center gap-1 2xl:gap-2">
             {navLinks.map((l) => (
               <li key={l.href}>
@@ -69,8 +69,8 @@ export default function Header({ userName }: { userName: string | null }) {
           </ul>
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center gap-3 xl:ml-0">
-          <div className="hidden items-center gap-1 border-r border-brand-navy/15 pr-3 xl:flex">
+        <div className="ml-auto flex shrink-0 items-center gap-3 2xl:ml-0">
+          <div className="hidden items-center gap-1 border-r border-brand-navy/15 pr-3 2xl:flex">
           {userName ? <><Link href="/bewertungen#bewertung-schreiben" className="px-3 text-sm font-semibold text-teal-700">{userName}</Link><button onClick={() => signOut({ callbackUrl: '/' })} className="px-3 text-sm font-semibold">Abmelden</button></> : <>
           <Link
             href="/login"
@@ -100,7 +100,7 @@ export default function Header({ userName }: { userName: string | null }) {
           ref={toggleRef}
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-navy/15 text-brand-navy transition-colors hover:bg-teal-50 hover:text-teal-700 xl:hidden"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-navy/15 text-brand-navy transition-colors hover:bg-teal-50 hover:text-teal-700 2xl:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
@@ -126,7 +126,7 @@ export default function Header({ userName }: { userName: string | null }) {
       <div
         id="mobile-nav"
         hidden={!open}
-        className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-black/5 bg-white xl:hidden"
+        className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-black/5 bg-white 2xl:hidden"
       >
         <nav aria-label="Mobile Navigation" className="container-page pb-24 pt-3 md:pb-6">
           <ul className="grid sm:grid-cols-2 sm:gap-x-8">

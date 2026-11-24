@@ -3,6 +3,7 @@ import { site, description } from '@/lib/site';
 
 export const publicPages = {
   '/': { title: 'Bodenleger in Wuppertal | Tomas Bau & Sanierung', description },
+  '/bewertungen': { title: 'Bewertungen | Tomas Bau & Sanierung', description: 'Erfahrungen unserer Kunden und Ihre Bewertung zu Tomas Bau & Sanierung.' },
   '/impressum': {
     title: 'Impressum | Tomas Bau & Sanierung Wuppertal',
     description: 'Anbieterangaben und Kontakt zu Tomas Bau & Sanierung in Wuppertal: Anschrift, Telefonnummer und E-Mail-Adresse.',
@@ -33,10 +34,9 @@ export function pageMetadata(path: keyof typeof publicPages): Metadata {
     metadataBase: null,
     title: { absolute: title }, description,
     alternates: { canonical: url },
-    robots: {
-      index: true, follow: true,
-      googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
-    },
+    robots: path === '/impressum' || path === '/datenschutz' || path === '/login' || path === '/signup'
+      ? { index: false, follow: false }
+      : { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
     openGraph: { type: 'website', locale: 'de_DE', url, siteName: site.name, title, description, images: [image] },
     twitter: { card: 'summary_large_image', title, description, images: [image] },
   };

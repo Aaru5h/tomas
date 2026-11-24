@@ -1,12 +1,16 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
+import { getProviders, signIn } from 'next-auth/react';
 import Link from 'next/link';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 export default function SignupPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [verificationUrl, setVerificationUrl] = useState('');
+  const [success, setSuccess] = useState('');
+  const [googleAvailable, setGoogleAvailable] = useState(false);
+  useEffect(() => { getProviders().then((providers) => setGoogleAvailable(Boolean(providers?.google))).catch(() => setGoogleAvailable(false)); }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -25,21 +29,24 @@ export default function SignupPage() {
       return;
     }
 
-    const res = await fetch('/api/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
-    });
-
-    if (!res.ok) {
+    try {
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
       const data = await res.json();
-      setError(data.error || 'Registrierung fehlgeschlagen.');
+      if (!res.ok) {
+        setError(data.error || 'Registrierung fehlgeschlagen.');
+        return;
+      }
+      if (typeof data.verificationUrl === 'string') setVerificationUrl(data.verificationUrl);
+      else setSuccess('Konto erstellt. Bitte bestätigen Sie Ihre E-Mail-Adresse über den Link in Ihrem Postfach und melden Sie sich dann an.');
+    } catch {
+      setError('Die Registrierung konnte nicht abgeschlossen werden. Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut.');
+    } finally {
       setLoading(false);
-      return;
     }
-
-    setLoading(false);
-    setError('Konto erstellt. Bitte bestätigen Sie Ihre E-Mail-Adresse über den Link in Ihrem Postfach und melden Sie sich dann an.');
   }
 
   return (
@@ -57,6 +64,8 @@ export default function SignupPage() {
             {error}
           </p>
         )}
+        {success && <p role="status" className="rounded-lg bg-teal-50 p-3 text-sm text-teal-900">{success}</p>}
+        {verificationUrl && <p role="status" className="rounded-lg bg-teal-50 p-3 text-sm text-teal-900">Lokaler Testmodus: <a className="font-semibold underline" href={verificationUrl}>E-Mail jetzt bestätigen</a>. Es wurde keine E-Mail versendet.</p>}
 
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -120,7 +129,7 @@ export default function SignupPage() {
         </button>
       </form>
 
-      <div className="relative">
+      {googleAvailable && <><div className="relative">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-gray-200" />
         </div>
@@ -153,6 +162,7 @@ export default function SignupPage() {
         </svg>
         Mit Google registrieren
       </button>
+      </>}
 
       <p className="text-center text-sm text-gray-600">
         Bereits ein Konto?{' '}

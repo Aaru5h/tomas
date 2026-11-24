@@ -17,8 +17,8 @@ export async function saveReview(form: FormData) {
   const title = String(form.get('title') ?? '').trim();
   const body = String(form.get('body') ?? '').trim();
   if (!Number.isInteger(rating) || rating < 1 || rating > 5 || title.length > 100 || body.length < 30 || body.length > 1500 || /[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(body)) redirect('/bewertungen?error=invalid');
-  const user = await prisma.user.findUnique({ where: { id: userId }, select: { emailVerified: true } });
-  if (!user?.emailVerified) redirect('/bewertungen?error=verify');
+  const user = await prisma.user.findUnique({ where: { id: userId }, select: { emailVerified: true, accounts: { where: { provider: 'google' }, select: { provider: true }, take: 1 } } });
+  if (!user || (!user.emailVerified && user.accounts.length === 0)) redirect('/bewertungen?error=verify');
   const existing = await prisma.review.findUnique({ where: { userId }, select: { updatedAt: true } });
   if (existing && Date.now() - existing.updatedAt.getTime() < 60000) redirect('/bewertungen?error=wait');
   await prisma.review.upsert({ where: { userId }, create: { userId, rating, title: title || null, body }, update: { rating, title: title || null, body, status: 'PENDING', publishedAt: null, moderationNote: null, moderatedAt: null, moderatedBy: null } });

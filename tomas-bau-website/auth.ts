@@ -12,10 +12,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: '/login',
   },
   providers: [
-    Google({
+    ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET ? [Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+    })] : []),
     Credentials({
       credentials: {
         email: { label: 'Email', type: 'email' },
@@ -42,6 +42,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    signIn({ account, profile }) {
+      if (account?.provider === 'google') return profile?.email_verified === true;
+      return true;
+    },
     jwt({ token, user }) {
       if (user) token.id = user.id;
       return token;

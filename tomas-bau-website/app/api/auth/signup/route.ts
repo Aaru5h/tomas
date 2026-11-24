@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   const origin = req.headers.get('origin');
   if (origin !== new URL(req.url).origin && origin !== new URL(site.url).origin) return NextResponse.json({ error: 'Ungültige Anfrage.' }, { status: 403 });
   if (req.headers.get('content-type')?.split(';')[0] !== 'application/json') return NextResponse.json({ error: 'Ungültige Anfrage.' }, { status: 415 });
-  const key = req.headers.get('x-forwarded-for')?.split(',')[0] || 'shared';
+  const key = process.env.AUTH_TRUST_PROXY === 'true' ? req.headers.get('x-forwarded-for')?.split(',')[0] || 'shared' : 'shared';
   const now = Date.now();
   for (const [id, value] of attempts) if (value.until < now) attempts.delete(id);
   const attempt = attempts.get(key) || { count: 0, until: now + 600000 };
@@ -18,11 +18,18 @@ export async function POST(req: Request) {
   attempts.set(key, attempt);
   if (Number(req.headers.get('content-length')) > 4096) return NextResponse.json({ error: 'Anfrage zu groß.' }, { status: 413 });
   let data: Record<string, unknown>;
-  try { data = await req.json(); } catch { return NextResponse.json({ error: 'Ungültige Anfrage.' }, { status: 400 }); }
+  try {
+    const raw = await req.text();
+    if (raw.length > 4096) return NextResponse.json({ error: 'Anfrage zu groß.' }, { status: 413 });
+    data = JSON.parse(raw);
+    if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Invalid body');
+  } catch { return NextResponse.json({ error: 'Ungültige Anfrage.' }, { status: 400 }); }
   const name = typeof data.name === 'string' ? data.name.trim() : '';
   const email = typeof data.email === 'string' ? data.email.trim().toLowerCase() : '';
   const password = data.password;
-  if (!process.env.RESEND_API_KEY || !process.env.AUTH_FROM_EMAIL) return NextResponse.json({ error: 'Registrierung derzeit nicht verfügbar.' }, { status: 503 });
+  const localVerification = process.env.NODE_ENV === 'development' && process.env.AUTH_DEV_VERIFICATION_LINK === 'true';
+  const sender = process.env.AUTH_FROM_EMAIL;
+  if (!localVerification && (!process.env.RESEND_API_KEY || !sender)) return NextResponse.json({ error: 'Registrierung derzeit nicht verfügbar.' }, { status: 503 });
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254 || name.length > 100 || typeof password !== 'string' || password.length < 10 || password.length > 128) {
     return NextResponse.json(
@@ -48,7 +55,8 @@ export async function POST(req: Request) {
     });
   } catch { return NextResponse.json({ error: 'Registrierung fehlgeschlagen. Bitte prüfen Sie Ihre Angaben.' }, { status: 409 }); }
   const link = `${new URL(req.url).origin}/api/auth/verify?email=${encodeURIComponent(email)}&token=${token}`;
-  const sent = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: process.env.AUTH_FROM_EMAIL, to: [email], subject: 'E-Mail-Adresse bestätigen', text: `Bestätigen Sie Ihre E-Mail-Adresse innerhalb von 24 Stunden: ${link}` }), signal: AbortSignal.timeout(10000) }).catch(() => null);
+  if (localVerification) return NextResponse.json({ success: true, verificationUrl: link }, { status: 201, headers: { 'Cache-Control': 'no-store' } });
+  const sent = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: sender, to: [email], subject: 'E-Mail-Adresse bestätigen', text: `Bestätigen Sie Ihre E-Mail-Adresse innerhalb von 24 Stunden: ${link}` }), signal: AbortSignal.timeout(10000) }).catch(() => null);
   if (!sent?.ok) {
     await prisma.user.delete({ where: { email } });
     await prisma.verificationToken.deleteMany({ where: { identifier: email } });

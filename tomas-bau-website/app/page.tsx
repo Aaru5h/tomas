@@ -89,7 +89,7 @@ export default function HomePage() {
               <span className="mt-3 inline-flex items-center gap-3 text-sm font-semibold text-teal-700 underline underline-offset-4 group-hover:text-teal-600">Unser Flyer · in voller Größe öffnen <Arrow /></span>
             </a>
           </figure>
-        </div><div className="self-start rounded-xl bg-white p-6 sm:p-9"><h3 className="text-xl font-bold">Ihr Projekt kurz beschrieben</h3><p className="mb-6 mt-2 text-sm leading-relaxed text-brand-navy/70">Das Formular bereitet eine E-Mail vor. Sie senden sie anschließend in Ihrem E-Mail-Programm ab.</p><ContactForm /></div></div></section>
+        </div><div className="self-start rounded-xl bg-white p-6 sm:p-9"><h3 className="text-xl font-bold">Ihr Projekt kurz beschrieben</h3><p className="mb-6 mt-2 text-sm leading-relaxed text-brand-navy/70">Ihre Anfrage wird direkt an unser Geschäftspostfach gesendet.</p><ContactForm /></div></div></section>
     </>
   );
 }

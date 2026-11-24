@@ -380,6 +380,7 @@ export const navLinks = [
   { href: '#ueber-uns', label: 'Über uns' },
   { href: '#galerie', label: 'Galerie' },
   { href: '#einsatzgebiet', label: 'Einsatzgebiet' },
+  { href: 'bewertungen', label: 'Bewertungen' },
   { href: '#faq', label: 'Fragen & Antworten' },
   { href: '#kontakt', label: 'Kontakt' },
 ];
